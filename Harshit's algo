@@ -1,0 +1,540 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int m;
+int n;
+/*
+struct ll
+{
+    char mat[m][n];
+    int priceOfPath;
+    ll* next;
+};
+ll* root = NULL;
+ll* last = NULL;
+int noOfNodes=0;
+void dijistra(int x1,int y1,int x2,int y2,char matrix[m][n],int price,char actualMat[m][n],int m,int n)//m,n should be here
+{
+    if(x1==x2&&y1==y2)
+    {
+        ll* temp = new ll();
+        for(int u=0;u<m;u++)
+        {
+                for(int k=0;k<n;k++)
+                {
+                    (temp->mat[u][k])= matrix[u][k];
+                }
+        }
+        temp->priceOfPath=price;
+        if(noOfNodes==0)
+        {
+            root=temp;
+        }
+        if(last == NULL)
+        {
+            last=temp;
+        }
+        else
+        {
+            last->next=temp;
+        }
+        temp->next=NULL;
+        noOfNodes++;
+        return;
+    }
+    char r=actualMat[x1][y1];
+    if(x1-1>-1&&y1-1>-1)
+    {
+        if(r=='G')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1-1,y1-1,x2,y2,copymat,price+500,actualMat,m,n);
+        }
+        else if(r=='M')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1-1,y1-1,x2,y2,copymat,price+2500,actualMat,m,n);
+        }
+        else if(r=='W')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1-1,y1-1,x2,y2,copymat,price+1500,actualMat,m,n);
+        }
+    }
+    if(x1-1>-1)
+    {
+        if(r=='G')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1-1,y1,x2,y2,copymat,price+500,actualMat,m,n);
+        }
+        else if(r=='M')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1-1,y1,x2,y2,copymat,price+2500,actualMat,m,n);
+        }
+        else if(r=='W')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1-1,y1,x2,y2,copymat,price+1500,actualMat,m,n);
+        }
+    }
+    if(x1-1>-1&&y1+1<n)
+    {
+        if(r=='G')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1-1,y1+1,x2,y2,copymat,price+500,actualMat,m,n);
+        }
+        else if(r=='M')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1-1,y1+1,x2,y2,copymat,price+2500,actualMat,m,n);
+        }
+        else if(r=='W')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1-1,y+1,x2,y2,copymat,price+1500,actualMat,m,n);
+        }
+    }
+    if(y1+1<n)
+    {
+        if(r=='G')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1,y1+1,x2,y2,copymat,price+500,actualMat,m,n);
+        }
+        else if(r=='M')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1,y1+1,x2,y2,copymat,price+2500,actualMat,m,n);
+        }
+        else if(r=='W')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1,y1+1,x2,y2,copymat,price+1500,actualMat,m,n);
+        }
+    }
+    if(x1+1<m&&y1+1<n)
+    {
+        if(r=='G')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1+1,y1+1,x2,y2,copymat,price+500,actualMat,m,n);
+        }
+        else if(r=='M')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1+1,y1+1,x2,y2,copymat,price+2500,actualMat,m,n);
+        }
+        else if(r=='W')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1+1,y1+1,x2,y2,copymat,price+1500,actualMat,m,n);
+        }
+    }
+    if(x1+1<m)
+    {
+        if(r=='G')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1+1,y1,x2,y2,copymat,price+500,actualMat,m,n);
+        }
+        else if(r=='M')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1+1,y1,x2,y2,copymat,price+2500,actualMat,m,n);
+        }
+        else if(r=='W')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1+1,y1,x2,y2,copymat,price+1500,actualMat,m,n);
+        }
+    }
+    if(x1+1<m&&y1-1>-1)
+    {
+        if(r=='G')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1+1,y1-1,x2,y2,copymat,price+500,actualMat,m,n);
+        }
+        else if(r=='M')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1+1,y1-1,x2,y2,copymat,price+2500,actualMat,m,n);
+        }
+        else if(r=='W')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1+1,y1-1,x2,y2,copymat,price+1500,actualMat,m,n);
+        }
+    }
+    if(y1-1>-1)
+    {
+        if(r=='G')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1,y1-1,x2,y2,copymat,price+500,actualMat,m,n);
+        }
+        else if(r=='M')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1,y1-1,x2,y2,copymat,price+2500,actualMat,m,n);
+        }
+        else if(r=='W')
+        {
+            char copymat[m][n];
+            for(int u=0;u<m;u++)
+            {
+                for(int k=0;k<n;k++)
+                {
+                    copymat[u][k]=matrix[u][k];
+                }
+            }
+            copymat[x1][y1]='*';
+            dijistra(x1,y1-1,x2,y2,copymat,price+1500,actualMat,m,n);
+        }
+    }
+}
+void merger(char matrix[m][n],int m,int n)
+{
+    int storeX[100];
+    int storeY[100];
+    for(int u=0;u<100;u++)
+    {
+        storeX[u]=0;
+        storeY[u]=0;
+    }
+    int op=0;
+    for(int u=0;u<m;u++)
+    {
+        for(int k=0;k<n;k++)
+        {
+            if(matrix[u][k]!='G'&&matrix[u][k]!='M'&&matrix[u][k]!='W'&&matrix[u][k]!='1')
+            {
+                storeX[op]=u;
+                storeY[op]=k;
+                op++;
+            }
+        }
+    }
+
+}
+void givemepath(char mat[i][j],int m,int n)
+{
+     int indexOfX[6]={0};
+     int indexOfY[6]={0};
+     int h=0;
+     for(int u=0;u<m;u++)
+    {
+        for(int k=0;k<n;k++)
+        {
+            if(mat[u][k]='C')
+            {
+                indexOfX[h++]=u;
+                indexOfY[h++]=k;
+            }
+
+        }
+    }
+    char allShortestPath[m][n];
+    for(int u=0;u<m;u++)
+    {
+        for(int k=0;k<n;k++)
+        {
+            allShortestPath[u][k]='.';
+        }
+    }
+    int po;
+    for(int q=1;q<7;q++)
+    {
+        for(int w=1;w<7;w++)
+        {
+            po++;
+            if(q!=w)
+            {
+                int xpath[100];
+                int ypath[100];
+                for(int k=0;k<100;k++)
+                {
+                    xpath[k]=-1;
+                    xpath[k]=-1;
+                }
+                dijistra(q,q,w,w,allShortestPath,0,mat,m,n);
+                ll* temp=root;
+                ll* pointerOfCheapestPath;
+                int minimin=INT_MAX;
+                while(temp!=NULL)
+                {
+                    if(minimin>temp->price)
+                    {
+                        minimin=temp->price;
+                        pointerOfCheapestPath=temp;
+                    }
+                    temp=temp->next;
+                }
+                for(int u=0;u<m;u++)
+                {
+                    for(int k=0;k<n;k++)
+                    {
+                        if(allShortestPath[u][k]=='.'||allShortestPath[u][k]=='G'||allShortestPath[u][k]=='M'||allShortestPath[u][k]=='R')
+                        allShortestPath[u][k]=pointerOfCheapestPath->mat[u][k]+7;
+                        else
+                        allShortestPath[u][k]=allShortestPath[u][k]+1;
+                    }
+                }
+                ll* temp2=root;
+                while(temp2!=NULL)
+                {
+                    if(temp->next!=NULL)
+                    ll* lol=temp2->next;
+                    delete(temp2);
+                    temp2=lol;
+                }
+            }
+        }
+    }
+    merger(allShortestPath,m,n);
+
+}
+*/
+int main()
+{
+    char matrixOfImage[100][100];
+    int m=100;
+    int n=100;
+    char r='A';
+    for(int u=0;u<m;u++)
+    {
+        for(int k=0;k<n;k++)
+        {
+            matrixOfImage[u][k]='.';
+        }
+    }
+    int temp=0;
+    while(temp!=5)
+    {
+        int tempmat1=rand()%100;
+        int tempmat2=rand()%100;
+            matrixOfImage[tempmat1][tempmat2]=r++;
+            temp++;
+    }
+    int noOfPassengers[6][6];
+    for(int u=0;u<6;u++)
+    {
+        for(int k=0;k<6;k++)
+        {
+            if(u==k)
+            {
+                noOfPassengers[u][k]=0;
+            }
+            else
+            {
+                noOfPassengers[u][k]=rand()%100;
+            }
+        }
+    }
+    for(int u=0;u<m;u++)
+    {
+        for(int k=0;k<n;k++)
+        {
+            cout<<matrixOfImage[u][k];
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+    cout<<"Number Of Passengers travelling to every city "<<endl;
+    for(int u=0;u<6;u++)
+    {
+        for(int k=0;k<6;k++)
+        {
+            cout<<noOfPassengers[u][k]<<" ";
+        }
+        cout<<endl;
+    }
+    //givemepath(matrixOfImage,m,n);
+}
